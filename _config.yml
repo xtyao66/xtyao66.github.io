@@ -22,11 +22,11 @@ repository               : "xtyao66/xtyao66.github.io"
 author:
   # Biographic information
   avatar           : "profile.png"
-  name             : "Your Sidebar Name"
+  name             : "Xiteng Yao"
   pronouns         : # example: "she/her"  
   bio              : "Short biography for the left-hand sidebar"
-  location         : "Earth"
-  employer         : "Red Brick University"
+  location         : "Boston, MA, United States"
+  employer         : "Boston University"
   uri              : # URL
   email            : "xtyao[at]bu.edu" 
 
