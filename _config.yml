@@ -213,7 +213,7 @@ kramdown:
       start_line: 1
 
 # Includes & excludes
-include: ["_pages"]
+include: ["_pages", ".nojekyll"] # .nojekyll: GitHub Pages serves the built site as-is
 exclude:
   - bin/
   - Dockerfile
