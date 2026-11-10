@@ -1,0 +1,127 @@
+---
+---
+
+% Publications, newest first within each year (jekyll-scholar groups by year).
+% Site-only fields: abbr, selected, bibtex_show, pdf, html, code, award, award_name, arxiv.
+% "*" after a surname marks equal contribution.
+
+@inproceedings{yao2026acbench,
+  preview     = {acbench.svg},
+  abbr        = {HPEC},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {{ACBench}: A Benchmark Suite for Auditing Retry and Profiling Feedback in {LLM}-Driven Code Optimization},
+  author      = {Yao*, Xiteng and Chu*, Ziyuan and Tai*, Feng and Xue, Bangjie and Hu, Yigong and Herbordt, Martin},
+  booktitle   = {2026 IEEE High Performance Extreme Computing Conference (HPEC)},
+  year        = {2026},
+  abstract    = {ACBench is a benchmark of 14 code-optimization tasks drawn from merged pull requests in six production Go codebases. It separates the value of feedback (application errors, benchmark summaries, CPU profiles) from the value of simply getting more attempts, and tracks when a run can actually use that feedback.},
+  pdf         = {https://ieee-hpec.org/wp-content/uploads/2026/09/266.pdf},
+  code        = {https://github.com/xtyao66/acbench},
+}
+
+@inproceedings{yao2026poolstatelens,
+  preview     = {poolstatelens.svg},
+  abbr        = {HPEC},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {{PoolStateLens}: Evaluating the Performance of an On-Switch Memory Pool for {LLM} Training},
+  author      = {Yao, Xiteng and Herbordt, Martin},
+  booktitle   = {2026 IEEE High Performance Extreme Computing Conference (HPEC)},
+  year        = {2026},
+  pdf         = {https://ieee-hpec.org/wp-content/uploads/2026/09/327.pdf},
+  abstract    = {A switch-attached memory pool can hold LLM training state (parameters, master weights, optimizer moments) so capacity grows independently of GPU count. PoolStateLens is a measurement-grounded analytical method that compares this design with FSDP over a full training iteration, using GB200/NVLink-5 measurements and ASTRA-sim checks. Pooling can reduce the GPU memory needed for training state, but matching FSDP speed requires about 7.9 TB/s of aggregate raw state bandwidth in a controlled 7B, 32-GPU case, under the model's assumptions.},
+}
+
+@inproceedings{yao2026rlgpucompiler,
+  preview     = {rl-gpu-compiler.svg},
+  abbr        = {HPEC},
+  bibtex_show = {true},
+  title       = {Toward {RL}-Guided {GPU} Compiler Optimization: Case Studies on {Nvidia} {Blackwell} {GPUs}},
+  author      = {Yao, Xiteng and Herbordt, Martin},
+  booktitle   = {2026 IEEE High Performance Extreme Computing Conference (HPEC)},
+  year        = {2026},
+  pdf         = {https://ieee-hpec.org/wp-content/uploads/2026/09/267.pdf},
+  abstract    = {Case studies of reinforcement-learning-guided GPU compiler optimization on NVIDIA Blackwell, combining runtime measurements with evidence from each compilation stage to understand when and why an optimization helps.},
+}
+
+@inproceedings{yao2026smartfusellm,
+  preview     = {smartfuse-llm.svg},
+  abbr        = {HEART},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {{SmartFuse-LLM}: Fusing Computation into Collectives for Efficient Tensor-Parallel {LLM} Systems},
+  author      = {Yao, Xiteng and Xue, Bangjie and Skjellum, Anthony and Herbordt, Martin},
+  booktitle   = {Proceedings of the 16th International Symposium on Highly Efficient Accelerators and Reconfigurable Technologies (HEART)},
+  publisher   = {ACM},
+  pages       = {27--35},
+  year        = {2026},
+  doi         = {10.1145/3814576.3814596},
+  abstract    = {SmartFuse-LLM is an FPGA-based switch datapath that fuses collective communication, residual addition, and RMSNorm at tensor-parallel boundaries, removing a network round trip and GPU-side normalization. GPU profiling and RTL co-simulation project 50.5% lower per-boundary latency.},
+}
+
+@article{yao2026kernelsight,
+  preview     = {kernelsight-lm.svg},
+  abbr        = {arXiv},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {{KernelSight-LM}: A Kernel-Level {LLM} Inference Simulator},
+  author      = {Yao, Xiteng and Kim, Taeho and Pei, Hengzhi and Liu, Xinle and Ulrich, Kyle and Lausen, Leonard and Khetan, Ashish and Song, Xiang and Karypis, George and Herbordt, Martin},
+  journal     = {arXiv preprint arXiv:2606.28565},
+  year        = {2026},
+  arxiv       = {2606.28565},
+  abstract    = {KernelSight-LM is a GPU-kernel-aware profiling and simulation toolchain that combines kernel-latency, communication, and host-overhead models in a discrete-event scheduler to predict end-to-end LLM inference latency and throughput. Across six model families it reaches 2.7% median throughput-prediction error in the target-measured setting.},
+}
+
+@inproceedings{yao2025mpc,
+  preview     = {mpc-fpga.svg},
+  abbr        = {HPEC},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {Accelerating Multi-Party Computation Using Heterogeneous Systems},
+  author      = {Yao, Xiteng and Yang, Shining and Varia, Mayank and Herbordt, Martin},
+  booktitle   = {2025 IEEE High Performance Extreme Computing Conference (HPEC)},
+  pages       = {1--10},
+  year        = {2025},
+  doi         = {10.1109/HPEC67600.2025.11196126},
+  award       = {Outstanding Student Paper Award},
+  abstract    = {An FPGA architecture for secure machine-learning training with multi-party computation that integrates the Coyote RDMA stack on AMD FPGA SmartNICs for CPU-bypass transfers, overlapping communication with computation and reaching a 2.1× convolution-layer speedup over existing MPC frameworks.},
+}
+
+@inproceedings{yang2025loadimbalance,
+  preview     = {load-imbalance.svg},
+  abbr        = {HPEC},
+  bibtex_show = {true},
+  title       = {Load Imbalance in {HPC} Applications: Improved Profiling and New Ways to Use Wasted Cycles},
+  author      = {Yang, Shining and Yao, Xiteng and Nansamba, Grace and Abouelmagd, Amr Akmal and Skjellum, Anthony and Herbordt, Martin},
+  booktitle   = {2025 IEEE High Performance Extreme Computing Conference (HPEC)},
+  pages       = {1--9},
+  year        = {2025},
+  doi         = {10.1109/HPEC67600.2025.11196678},
+}
+
+@inproceedings{guo2025sgc,
+  preview     = {sgc.svg},
+  abbr        = {ICS},
+  bibtex_show = {true},
+  selected    = {true},
+  title       = {{SmartNIC-GPU-CPU} Heterogeneous System for Large Machine Learning Model with Software-Hardware Codesign},
+  author      = {Guo, Anqi and Hao, Yuchen and Yao, Xiteng and Yang, Shining and Huang, Jianyu and Geng, Tong and Herbordt, Martin},
+  booktitle   = {Proceedings of the 39th ACM International Conference on Supercomputing (ICS)},
+  publisher   = {ACM},
+  pages       = {837--852},
+  year        = {2025},
+  doi         = {10.1145/3721145.3729514},
+  abstract    = {A SmartNIC-based design for ZeRO training that uses parameter prefetching, buffering, and dynamic scheduling to overlap GPU/CPU computation with communication. Hardware-calibrated cycle-accurate simulation projects over 1.6× training throughput for a 100B-parameter model versus GPU-CPU offload with ordinary NICs.},
+}
+
+@inproceedings{shahzad2022rlhls,
+  preview     = {rl-hls.svg},
+  abbr        = {LLVM-HPC},
+  bibtex_show = {true},
+  title       = {Reinforcement Learning Strategies for Compiler Optimization in High Level Synthesis},
+  author      = {Shahzad, Hafsah and Sanaullah, Ahmed and Arora, Sanjay and Munafo, Robert and Yao, Xiteng and Drepper, Ulrich and Herbordt, Martin},
+  booktitle   = {IEEE/ACM Workshop on the LLVM Compiler Infrastructure in HPC (LLVM-HPC), held with SC22, Dallas},
+  year        = {2022},
+  pdf         = {https://www.bu.edu/caadlab/Shahzad22.pdf},
+  abstract    = {Expands the reinforcement-learning strategies and quality metrics used to tune LLVM pass sequences for FPGA high-level synthesis, showing up to 23× faster learning, 4× more performance potential, and 3× speedup over -O3.},
+}

@@ -1,77 +1,61 @@
-# Academic Pages
-**Academic Pages is a Github Pages template for academic websites.**
+# xtyao66.github.io
 
-![Academic Pages template example](images/homepage.png "Academic Pages template example")
+Source for Xiteng Yao's academic website, <https://xtyao66.github.io>.
+Built with the [al-folio](https://github.com/alshedivat/al-folio) Jekyll starter (v1.x),
+which replaced the earlier Academic Pages template in November 2026. The old version
+is still in this repository's Git history.
 
-# Getting Started
+## Layout
 
-1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
-1. Click the "Use this template" button in the top right.
-1. On the "New repository" page, enter your repository name as "[your GitHub username].github.io", which will also be your website's URL.
-1. Set site-wide configuration and add your content.
-1. Upload any files (like PDFs, .zip files, etc.) to the `files/` directory. They will appear at https://[your GitHub username].github.io/files/example.pdf.
-1. Check status by going to the repository settings, in the "GitHub pages" section
-1. (Optional) Use the Jupyter notebooks or python scripts in the `markdown_generator` folder to generate markdown files for publications and talks from a TSV file.
+| Path | What it holds |
+| --- | --- |
+| `_pages/about.md` | Home page: bio, research interests, news, selected papers |
+| `_bibliography/papers.bib` | All publications; the publications page, "selected papers" and each research page's paper list are generated from it |
+| `_projects/` | One page per research thread, shown at `/research/` (`category: current` or `earlier`, ordered by `importance`) |
+| `_pages/experience.md` | Internships and research as a timeline, then teaching and service, at `/experience/` |
+| `tools/make_diagrams.py` | Draws the schematic system diagrams; writes `_includes/diagrams/*.svg` (inline, follows light/dark mode) and `assets/img/publication_preview/*.svg` (paper thumbnails and research cards). Edit the script, then run `python tools/make_diagrams.py`; don't hand-edit the SVGs |
+| `assets/css/main.scss`, `_sass/_site.scss` | Local copy of the theme's stylesheet entry with a blue accent color, plus this site's own styles (diagram colors, number tiles, experience timeline). After an al-folio upgrade, diff `main.scss` against the gem's copy |
+| `assets/pdf/cv.pdf` | The CV, embedded at `/cv/` and linked from the home-page icons. To update it, replace this file and keep the name |
+| `_layouts/bib.liquid` | Local copy of the theme's publication-entry template: wider thumbnails, the `award` field shown as a trophy line linking to `/awards/`, the DOI button labelled by publisher (IEEE Xplore / ACM DL), "Abstract" and "Cite" labels, and `html` values starting with `/` treated as site paths ("Paper page") |
+| `_includes/news.liquid` | Local copy of the theme's news list: a news item with `date_precision: month` shows month and year only |
+| `_news/` | Dated announcements on the home page |
+| `_data/socials.yml` | Email, Google Scholar, GitHub, LinkedIn |
+| `_data/coauthors.yml`, `_data/venues.yml` | Co-author links and venue badge colors for the publication list |
+| `_config.yml` | Site settings |
 
-See more info at https://academicpages.github.io/
+Layouts, styles and features come from the `al_folio_*` gems (see `Gemfile`), not from
+this repository, except for the three local overrides above (`main.scss`, `bib.liquid`,
+`news.liquid`). After an al-folio upgrade, diff each against the gem's copy.
 
-## Running locally
+Keep page `description` fields plain text: the theme also writes them into `<meta>` tags,
+so HTML or quotes there leak onto the page.
 
-When you are initially working your website, it is very useful to be able to preview the changes locally before pushing them to GitHub. To work locally you will need to:
+## Google Scholar
 
-1. Clone the repository and made updates as detailed above.
-1. Make sure you have ruby-dev, bundler, and nodejs installed
-    
-    On most Linux distribution and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
-    ```bash
-    sudo apt install ruby-dev ruby-bundler nodejs
-    ```
-    On MacOS the commands are:
-    ```bash
-    brew install ruby
-    brew install node
-    gem install bundler
-    ```
-1. Run `bundle install` to install ruby dependencies. If you get errors, delete Gemfile.lock and try again.
-1. Run `jekyll serve -l -H localhost` to generate the HTML and serve it from `localhost:4000` the local server will automatically rebuild and refresh the pages on change.
+Papers are indexed from their publisher pages (DOIs) and from the PDFs HPEC hosts. If a
+paper ever needs a self-hosted copy for Scholar before its publisher version appears, add a
+static `publications/<paper>/index.html` with the `citation_*` tags from
+[Google Scholar's inclusion guidelines](https://scholar.google.com/intl/en/scholar/inclusion.html)
+and put the PDF in the same folder (`citation_pdf_url` must point at or below the page's own
+directory). For IEEE papers, post only the accepted manuscript with IEEE's copyright notice.
 
-If you are running on Linux it may be necessary to install some additional dependencies prior to being able to run locally: `sudo apt install build-essential gcc make`
+## Preview locally
 
-## Using Docker
-
-Working from a different OS, or just want to avoid installing dependencies? You can use the provided `Dockerfile` to build a container that will run the site for you if you have [Docker](https://www.docker.com/) installed.
-
-Start by build the container:
+Requires Docker. From this folder:
 
 ```bash
-docker build -t jekyll-site .
+docker compose up
 ```
 
-Next, run the container:
-```bash
-docker run -p 4000:4000 --rm -v $(pwd):/usr/src/app jekyll-site
-```
+Then open <http://localhost:8080>. Stop with Ctrl+C, then `docker compose down`.
 
-# Maintenance
+## Deploy
 
-Bug reports and feature requests to the template should be [submitted via GitHub](https://github.com/academicpages/academicpages.github.io/issues/new/choose). For questions concerning how to style the template, please feel free to start a [new discussion on GitHub](https://github.com/academicpages/academicpages.github.io/discussions).
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds the site and pushes
+the result to the `gh-pages` branch. In the repository's Settings → Pages, the source
+must be "Deploy from a branch", branch `gh-pages`, folder `/ (root)`.
 
-This repository was forked (then detached) by [Stuart Geiger](https://github.com/staeiou) from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/), which is © 2016 Michael Rose and released under the MIT License (see LICENSE.md). It is currently being maintained by [Robert Zupko](https://github.com/rjzupkoii) and additional maintainers would be welcomed.
+## License
 
-## Bugfixes and enhancements
-
-If you have bugfixes and enhancements that you would like to submit as a pull request, you will need to [fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo) this repository as opposed to using it as a template. This will also allow you to [synchronize your copy](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) of template to your fork as well.
-
-Unfortunately, one logistical issue with a template theme like Academic Pages that makes it a little tricky to get bug fixes and updates to the core theme. If you use this template and customize it, you will probably get merge conflicts if you attempt to synchronize. If you want to save your various .yml configuration files and markdown files, you can delete the repository and fork it again. Or you can manually patch.
-
----
-<div align="center">
-    
-![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
-[![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
-[![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/academicpages/academicpages.github.io?color=blue)](https://github.com/academicpages/academicpages.github.io/blob/master/LICENSE)
-
-[![GitHub stars](https://img.shields.io/github/stars/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io)
-[![GitHub forks](https://img.shields.io/github/forks/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/fork)
-</div>
+Template code is MIT-licensed by the al-folio authors (see `LICENSE`). Site content
+(text and papers) belongs to its authors; papers carry their publishers' notices.

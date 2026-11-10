@@ -1,64 +1,20 @@
 ---
-layout: archive
-title: "CV"
+layout: page
 permalink: /cv/
-author_profile: true
-redirect_from:
-  - /resume
+title: CV
+nav: true
+nav_order: 7
+description: Curriculum vitae (PDF).
 ---
 
-{% include base_path %}
+{% comment %}To update the CV, replace assets/pdf/cv.pdf with the new PDF (keep the file name).{% endcomment %}
 
-Education
-======
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
-* M.S. in Jekyll, GitHub University, 2014
-* B.S. in GitHub, GitHub University, 2012
+<div class="cv-pdf-actions">
+  <a class="btn-cv" href="{{ '/assets/pdf/cv.pdf' | relative_url }}" target="_blank" rel="noopener">Open PDF</a>
+  <a class="btn-cv" href="{{ '/assets/pdf/cv.pdf' | relative_url }}" download="Xiteng_Yao_CV.pdf">Download</a>
+</div>
 
-Work experience
-======
-* Spring 2024: Academic Pages Collaborator
-  * Github University
-  * Duties includes: Updates and improvements to template
-  * Supervisor: The Users
-
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
-
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
-  
-Skills
-======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
-
-Publications
-======
-  <ul>{% for post in site.publications reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Talks
-======
-  <ul>{% for post in site.talks reversed %}
-    {% include archive-single-talk-cv.html  %}
-  {% endfor %}</ul>
-  
-Teaching
-======
-  <ul>{% for post in site.teaching reversed %}
-    {% include archive-single-cv.html %}
-  {% endfor %}</ul>
-  
-Service and leadership
-======
-* Currently signed in to 43 different slack teams
+<object class="cv-pdf" title="CV (PDF)" data="{{ '/assets/pdf/cv.pdf' | relative_url }}#view=FitH&navpanes=0" type="application/pdf">
+  <p>Your browser can't show the PDF here.
+  <a href="{{ '/assets/pdf/cv.pdf' | relative_url }}">Open the CV</a> instead.</p>
+</object>

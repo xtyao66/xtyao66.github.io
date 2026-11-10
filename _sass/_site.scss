@@ -1,0 +1,303 @@
+// Styles specific to this site. Loaded last from assets/css/main.scss.
+// Colors come from the theme's CSS variables so light/dark mode follows the toggle.
+
+// ---------------------------------------------------------------------------
+// System diagrams (tools/make_diagrams.py). Inline SVGs read these variables;
+// standalone copies fall back to the light values baked into each SVG.
+// ---------------------------------------------------------------------------
+:root {
+  --dg-box: #ffffff;
+  --dg-grp: #f4f4f1;
+  --dg-line: #c9c8c2;
+  --dg-hl: #e3eefb;
+  --dg-hl-line: #2a78d6;
+  --dg-op: #fdeae1;
+  --dg-op-line: #eb6834;
+  --dg-text: #1f2328;
+  --dg-muted: #6b6a65;
+  --dg-arrow: #8f8e89;
+}
+html[data-theme="dark"] {
+  --dg-box: #26262a;
+  --dg-grp: #1e1e21;
+  --dg-line: #4a4a50;
+  --dg-hl: #16304f;
+  --dg-hl-line: #5598e7;
+  --dg-op: #3d2418;
+  --dg-op-line: #e0703f;
+  --dg-text: #e8e8ea;
+  --dg-muted: #a6a6ad;
+  --dg-arrow: #8a8a92;
+}
+
+figure.diagram {
+  margin: 1.5rem 0 2rem;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  figcaption {
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+    margin-top: 0.5rem;
+  }
+}
+
+// Key-number tiles on research pages
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+
+  .kpi {
+    border: 1px solid var(--global-divider-color);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+    background: var(--global-card-bg-color);
+  }
+  .kpi-value {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--global-theme-color);
+    line-height: 1.2;
+  }
+  .kpi-label {
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Experience timeline
+// ---------------------------------------------------------------------------
+.xp {
+  position: relative;
+  margin: 2rem 0 2rem 10px; // room for the timeline dots, which sit left of the line
+  padding-left: 1.75rem;
+  border-left: 2px solid var(--global-divider-color);
+
+  .xp-item {
+    position: relative;
+    margin-bottom: 2.25rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: calc(-1.75rem - 7px);
+      top: 0.45rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--global-theme-color);
+      box-shadow: 0 0 0 4px var(--global-bg-color);
+    }
+  }
+  .xp-when {
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .xp-role {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0.15rem 0 0;
+  }
+  .xp-org {
+    color: var(--global-theme-color);
+    margin-bottom: 0.5rem;
+  }
+  .xp-org .xp-where {
+    color: var(--global-text-color-light);
+  }
+  ul {
+    margin-bottom: 0.5rem;
+  }
+  .xp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.4rem;
+  }
+  .xp-tag {
+    font-size: 0.75rem;
+    padding: 0.1rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--global-divider-color);
+    color: var(--global-text-color-light);
+  }
+  .xp-links a {
+    margin-right: 0.9rem;
+    font-size: 0.9rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// CV page: embedded PDF with open/download buttons
+// ---------------------------------------------------------------------------
+.cv-pdf-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+}
+.btn-cv {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--global-theme-color);
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+.btn-cv:hover {
+  background: var(--global-theme-color);
+  color: var(--global-hover-text-color) !important;
+  text-decoration: none;
+}
+.cv-pdf {
+  width: 100%;
+  height: 85vh;
+  min-height: 600px;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+}
+@media (max-width: 576px) {
+  // phones rarely render inline PDFs; the buttons above stay the way in
+  .cv-pdf {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Awards page: featured award with photo
+// ---------------------------------------------------------------------------
+.award-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 1.5rem;
+  align-items: center;
+  margin: 1rem 0 2.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--global-divider-color);
+  border-radius: 10px;
+  background: var(--global-card-bg-color);
+
+  img {
+    width: 100%;
+    border-radius: 6px;
+  }
+  .xp-when {
+    font-size: 0.85rem;
+    color: var(--global-text-color-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .xp-role {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .xp-org {
+    color: var(--global-theme-color);
+    margin-bottom: 0.5rem;
+  }
+  p {
+    margin: 0;
+  }
+}
+@media (max-width: 576px) {
+  .award-feature {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Home page: contact icons sit under the bio, above the news
+.social.social-top {
+  margin: 1.25rem 0 0.5rem;
+  .contact-icons {
+    font-size: 2rem;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Publication list (_layouts/bib.liquid): larger thumbnails, inline award line
+// ---------------------------------------------------------------------------
+.publications {
+  .abbr .preview {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0.5rem;
+    background: #ffffff; // diagrams are drawn on white
+  }
+  .award-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0.2rem 0 0.15rem;
+    padding: 0.1rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #8a5a00;
+    background: #fdf1d6;
+    border: 1px solid #f0d28a;
+  }
+  .award-inline:hover {
+    text-decoration: none;
+    background: #fbe7b8;
+  }
+}
+html[data-theme="dark"] .publications .award-inline {
+  color: #f3c96b;
+  background: #3a2e14;
+  border-color: #6b5420;
+}
+
+// Larger, easier-to-hit buttons on publication entries
+.publications .links .btn {
+  font-size: 0.9rem;
+  padding: 0.3rem 0.9rem;
+  margin: 0.15rem 0.35rem 0.15rem 0;
+  border-radius: 6px;
+}
+
+// Sentence-case headings the theme hard-codes in lowercase
+// ("news", "selected publications" on the home page; "current"/"earlier" on /research/)
+h2 > a[href$="/news/"],
+h2 > a[href$="/publications/"] {
+  display: inline-block;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+}
+.projects h2.category {
+  text-transform: capitalize;
+}
+
+// ---------------------------------------------------------------------------
+// Accessibility fixes from review
+// ---------------------------------------------------------------------------
+// Secondary text: the theme's #828282 is under 4.5:1 for small text in both modes.
+:root {
+  --global-text-color-light: #6b6b6b; // 5.3:1 on white
+}
+html[data-theme="dark"] {
+  --global-text-color-light: #9a9a9a; // 6.0:1 on the dark background
+}
+// CV buttons: dark-mode hover was white on light blue (2.5:1)
+html[data-theme="dark"] .btn-cv:hover {
+  color: var(--global-bg-color) !important;
+}
+// Award badge: give dark mode a hover state too
+html[data-theme="dark"] .publications .award-inline:hover {
+  background: #4a3a18;
+}
+// Phones: keep diagram text legible; the figure scrolls sideways instead of shrinking
+@media (max-width: 576px) {
+  figure.diagram {
+    overflow-x: auto;
+    svg {
+      min-width: 520px;
+    }
+  }
+}

@@ -1,41 +1,36 @@
 ---
+# Site-local copy of al_folio_core 1.0.15's assets/css/main.scss.
+# Changes from the theme's version: the accent colors passed to "variables",
+# and the extra `site` partial at the end (_sass/_site.scss).
+# After an al-folio upgrade, diff this against the gem's copy.
 ---
+@charset "utf-8";
 
-/*
- *    Minimal Mistakes Jekyll Theme
- *
- *  - Michael Rose
- *  - mademistakes.com
- *  - https://twitter.com/mmistakes
- *
-*/
+@use "sass:math";
+@use "sass:string";
 
-@import "vendor/breakpoint/breakpoint"; // media query mixins
-@import "variables";
-@import "mixins";
-@import "vendor/susy/susy";
+@use "variables" with (
+  $max-content-width: {{ site.max_width | default:  "930px" }},
+  $purple-color: #1c5cab,
+  $cyan-color: #6da7ec
+);
 
-@import "reset";
-@import "base";
+@use "themes";
+@use "layout";
 
-@import "utilities";
-@import "animations";
-@import "tables";
-@import "buttons";
-@import "notices";
-@import "masthead";
-@import "navigation";
-@import "footer";
-@import "syntax";
+// Core styles organized by usage
+@use "typography";
+@use "navbar";
+@use "footer";
+@use "blog";
+@use "publications";
+@use "components";
+@use "utilities";
 
-@import "forms";
+// Other specialized styles
+@use "tabs";
+@use "teachings";
+@use "typograms";
 
-@import "page";
-@import "archive";
-@import "sidebar";
-
-@import "vendor/font-awesome/fontawesome";
-@import "vendor/font-awesome/solid";
-@import "vendor/font-awesome/brands";
-@import "vendor/magnific-popup/magnific-popup";
-@import "print";
+// This site's own styles: experience timeline, research plots
+@use "site";

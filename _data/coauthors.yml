@@ -1,0 +1,17 @@
+# Co-author links for publication lists, keyed by lowercase last name.
+# Only URLs that were checked to resolve to the right person are listed.
+"herbordt":
+  - firstname: ["Martin", "M.", "Martin C."]
+    url: https://www.bu.edu/eng/profile/martin-herbordt/
+
+"hu":
+  - firstname: ["Yigong", "Y."]
+    url: https://www.bu.edu/eng/profile/yigong-hu-phd/
+
+"varia":
+  - firstname: ["Mayank", "M."]
+    url: https://www.mvaria.com/
+
+"karypis":
+  - firstname: ["George", "G."]
+    url: https://www-users.cse.umn.edu/~karypis/

@@ -1,0 +1,18 @@
+"HPEC":
+  url: https://ieee-hpec.org/
+  color: "#00629b"
+
+"HEART":
+  url: https://heart2026.github.io/
+  color: "#0070a8"
+
+"ICS":
+  url: https://hpcrl.github.io/ICS2025-webpage/
+  color: "#0070a8"
+
+"LLVM-HPC":
+  url: https://llvm-hpc-workshop.github.io/
+  color: "#6f42c1"
+
+"arXiv":
+  color: "#b31b1b"

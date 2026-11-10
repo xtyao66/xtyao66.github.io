@@ -1,0 +1,44 @@
+<figure class="diagram"><svg class="dg" viewBox="0 0 640 232" role="img" aria-labelledby="load-imbalance-t load-imbalance-d" xmlns="http://www.w3.org/2000/svg"><title id="load-imbalance-t">Load imbalance in HPC applications</title><desc id="load-imbalance-d">Four parallel processes finish their work at different times and the faster ones wait idle at a synchronization point. A profiler measures that idle time, and the wasted cycles are reused to run other work.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style><defs><marker id="load-imbalance-mn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"/></marker><marker id="load-imbalance-mh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"/></marker><marker id="load-imbalance-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"/></marker></defs><text class="tx" x="70" y="45" text-anchor="end" font-size="12">Process 0</text>
+<rect class="hl" x="84" y="26" width="368" height="28" rx="7"/>
+<text class="tx" x="268.0" y="44.5" text-anchor="middle" font-size="11" font-weight="500">compute</text>
+<text class="tx" x="70" y="87" text-anchor="end" font-size="12">Process 1</text>
+<rect class="hl" x="84" y="68" width="214" height="28" rx="7"/>
+<text class="tx" x="191.0" y="86.5" text-anchor="middle" font-size="11" font-weight="500"></text>
+<rect class="op" x="300" y="68" width="152" height="28" rx="7"/>
+<text class="tx" x="376.0" y="86.5" text-anchor="middle" font-size="11" font-weight="500">idle</text>
+<text class="tx" x="70" y="129" text-anchor="end" font-size="12">Process 2</text>
+<rect class="hl" x="84" y="110" width="300" height="28" rx="7"/>
+<text class="tx" x="234.0" y="128.5" text-anchor="middle" font-size="11" font-weight="500"></text>
+<rect class="op" x="386" y="110" width="66" height="28" rx="7"/>
+<text class="tx" x="419.0" y="128.5" text-anchor="middle" font-size="11" font-weight="500"></text>
+<text class="tx" x="70" y="171" text-anchor="end" font-size="12">Process 3</text>
+<rect class="hl" x="84" y="152" width="160" height="28" rx="7"/>
+<text class="tx" x="164.0" y="170.5" text-anchor="middle" font-size="11" font-weight="500"></text>
+<rect class="op" x="246" y="152" width="206" height="28" rx="7"/>
+<text class="tx" x="349.0" y="170.5" text-anchor="middle" font-size="11" font-weight="500">idle</text>
+<line class="ar" stroke-dasharray="5 4" x1="452" y1="14" x2="452" y2="192"/>
+<text class="sb" x="452" y="208" text-anchor="middle" font-size="11">synchronization point</text>
+<rect class="bx" x="492" y="30" width="132" height="52" rx="7"/>
+<text class="tx" x="558.0" y="54.0" text-anchor="middle" font-size="13" font-weight="500">Profiler</text>
+<text class="sb" x="558.0" y="69.0" text-anchor="middle" font-size="11">measure idle time</text>
+<rect class="op" x="492" y="116" width="132" height="52" rx="7"/>
+<text class="tx" x="558.0" y="140.0" text-anchor="middle" font-size="12" font-weight="500">Reuse idle cycles</text>
+<text class="sb" x="558.0" y="155.0" text-anchor="middle" font-size="11">run other work</text>
+<polyline class="ar" points="456,56 490,56" marker-end="url(#load-imbalance-mn)"/>
+<polyline class="ar o" points="558,82 558,114" marker-end="url(#load-imbalance-mo)"/>
+<polyline class="ar o" points="490,150 456,150" marker-end="url(#load-imbalance-mo)"/>
+<text class="sb" x="268" y="226" text-anchor="middle" font-size="11">Faster processes wait; those wasted cycles can do useful work</text></svg>
+</figure>

@@ -1,0 +1,33 @@
+<figure class="diagram"><svg class="dg" viewBox="0 0 640 212" role="img" aria-labelledby="kernelsight-lm-t kernelsight-lm-d" xmlns="http://www.w3.org/2000/svg"><title id="kernelsight-lm-t">KernelSight-LM</title><desc id="kernelsight-lm-d">Kernel-latency, communication and host-overhead models feed a discrete-event scheduler that predicts end-to-end LLM inference latency and throughput.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style><defs><marker id="kernelsight-lm-mn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"/></marker><marker id="kernelsight-lm-mh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"/></marker><marker id="kernelsight-lm-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"/></marker></defs><rect class="bx" x="24" y="16" width="184" height="50" rx="7"/>
+<text class="tx" x="116.0" y="39.0" text-anchor="middle" font-size="13" font-weight="500">Kernel latency model</text>
+<text class="sb" x="116.0" y="54.0" text-anchor="middle" font-size="11">profiled GPU kernels</text>
+<rect class="bx" x="24" y="81" width="184" height="50" rx="7"/>
+<text class="tx" x="116.0" y="104.0" text-anchor="middle" font-size="13" font-weight="500">Communication model</text>
+<text class="sb" x="116.0" y="119.0" text-anchor="middle" font-size="11">collectives</text>
+<rect class="bx" x="24" y="146" width="184" height="50" rx="7"/>
+<text class="tx" x="116.0" y="169.0" text-anchor="middle" font-size="13" font-weight="500">Host overhead model</text>
+<text class="sb" x="116.0" y="184.0" text-anchor="middle" font-size="11">launch, scheduling</text>
+<rect class="hl" x="262" y="66" width="176" height="80" rx="7"/>
+<text class="tx" x="350.0" y="104.0" text-anchor="middle" font-size="12" font-weight="500">Discrete-event scheduler</text>
+<text class="sb" x="350.0" y="119.0" text-anchor="middle" font-size="11">batching, KV cache</text>
+<rect class="bx" x="486" y="66" width="132" height="80" rx="7"/>
+<text class="tx" x="552.0" y="104.0" text-anchor="middle" font-size="13" font-weight="500">Predicted</text>
+<text class="sb" x="552.0" y="119.0" text-anchor="middle" font-size="11">TTFT · TPOT · tput</text>
+<polyline class="ar" points="208,41 260,84" marker-end="url(#kernelsight-lm-mn)"/>
+<polyline class="ar" points="208,106 260,106" marker-end="url(#kernelsight-lm-mn)"/>
+<polyline class="ar" points="208,171 260,128" marker-end="url(#kernelsight-lm-mn)"/>
+<polyline class="ar h" points="438,106 484,106" marker-end="url(#kernelsight-lm-mh)"/></svg>
+</figure>
