@@ -62,7 +62,7 @@ jobs:
       - name: Setup Ruby 💎
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3.5"
+          ruby-version: "3.3" # latest 3.3.x; exact patch builds are not offered on new runner images
           bundler-cache: true
       - name: Setup Python 🐍
         uses: actions/setup-python@v7
