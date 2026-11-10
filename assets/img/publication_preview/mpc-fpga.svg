@@ -1,0 +1,40 @@
+<svg class="dg" viewBox="0 0 640 236" role="img" aria-labelledby="mpc-fpga-t mpc-fpga-d" xmlns="http://www.w3.org/2000/svg"><title id="mpc-fpga-t">FPGA-accelerated multi-party computation</title><desc id="mpc-fpga-d">Three parties each pair a host with an FPGA SmartNIC that runs the MPC engine. The SmartNICs exchange secret-shared data over RDMA through a 100 Gb/s switch, bypassing the CPU.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style><defs><marker id="mpc-fpga-mn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"/></marker><marker id="mpc-fpga-mh" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"/></marker><marker id="mpc-fpga-mo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"/></marker></defs><rect x="0" y="0" width="640" height="236" fill="#ffffff"/><rect class="grp" x="24" y="12" width="184" height="120" rx="10"/>
+<text class="gl" x="36" y="30" font-size="12">Party 1</text>
+<rect class="bx" x="40" y="38" width="152" height="34" rx="7"/>
+<text class="tx" x="116.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text>
+<rect class="hl" x="40" y="84" width="152" height="36" rx="7"/>
+<text class="tx" x="116.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text>
+<polyline class="ar" points="116,72 116,82" marker-end="url(#mpc-fpga-mn)"/>
+<polyline class="ar h" points="116,132 116,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"/>
+<rect class="grp" x="228" y="12" width="184" height="120" rx="10"/>
+<text class="gl" x="240" y="30" font-size="12">Party 2</text>
+<rect class="bx" x="244" y="38" width="152" height="34" rx="7"/>
+<text class="tx" x="320.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text>
+<rect class="hl" x="244" y="84" width="152" height="36" rx="7"/>
+<text class="tx" x="320.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text>
+<polyline class="ar" points="320,72 320,82" marker-end="url(#mpc-fpga-mn)"/>
+<polyline class="ar h" points="320,132 320,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"/>
+<rect class="grp" x="432" y="12" width="184" height="120" rx="10"/>
+<text class="gl" x="444" y="30" font-size="12">Party 3</text>
+<rect class="bx" x="448" y="38" width="152" height="34" rx="7"/>
+<text class="tx" x="524.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text>
+<rect class="hl" x="448" y="84" width="152" height="36" rx="7"/>
+<text class="tx" x="524.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text>
+<polyline class="ar" points="524,72 524,82" marker-end="url(#mpc-fpga-mn)"/>
+<polyline class="ar h" points="524,132 524,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"/>
+<rect class="bx" x="24" y="170" width="592" height="38" rx="7"/>
+<text class="tx" x="320.0" y="193.5" text-anchor="middle" font-size="12" font-weight="500">100 Gb/s switch  ·  RDMA, CPU bypass</text>
+<text class="sb" x="320" y="228" text-anchor="middle" font-size="11">Secret-shared data only: no party sees another&#x27;s inputs</text></svg>

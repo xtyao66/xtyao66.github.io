@@ -1,0 +1,206 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> FPGA-accelerated secure machine learning | Xiteng Yao </title> <meta name="author" content="Xiteng Yao"> <meta name="description" content="Multi-party computation on FPGA SmartNICs with RDMA"> <meta name="keywords" content="Xiteng Yao, Boston University, CAAD Lab, LLM systems, FPGA, SmartNIC, collective communication, HPC"> <meta property="og:site_name" content="Xiteng Yao"> <meta property="og:type" content="website"> <meta property="og:title" content="Xiteng Yao | FPGA-accelerated secure machine learning"> <meta property="og:url" content="https://xtyao66.github.io/research/secure-ml-mpc/"> <meta property="og:description" content="Multi-party computation on FPGA SmartNICs with RDMA"> <meta property="og:image" content="https://xtyao66.github.io/assets/img/og-card.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="FPGA-accelerated secure machine learning"> <meta name="twitter:description" content="Multi-party computation on FPGA SmartNICs with RDMA"> <meta name="twitter:image" content="https://xtyao66.github.io/assets/img/og-card.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Xiteng Yao"
+        },
+        "url": "https://xtyao66.github.io/research/secure-ml-mpc/",
+        "@type": "WebSite",
+        "description": "Multi-party computation on FPGA SmartNICs with RDMA",
+        "headline": "FPGA-accelerated secure machine learning",
+        
+        "sameAs": ["https://scholar.google.com/citations?user=X9AzwrMAAAAJ","https://github.com/xtyao66","https://www.linkedin.com/in/xiteng-yao-578086199",null],
+        
+        "name": "Xiteng Yao",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.svg?v=5e780df17fd8ed40e292c8127a45485b"> <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6abae07e8ffe37e535be738e876bbe60"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://xtyao66.github.io/research/secure-ml-mpc/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Xiteng Yao </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">Publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/research/">Research <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/experience/">Experience </a> </li> <li class="nav-item "> <a class="nav-link" href="/awards/">Awards </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">FPGA-accelerated secure machine learning</h1> <p class="post-description">Multi-party computation on FPGA SmartNICs with RDMA</p> </header> <article> <p>Multi-party computation (MPC) lets several parties train or evaluate a model jointly without revealing their inputs, but every multiplication needs a round of communication between parties. This project runs the MPC engine on FPGA SmartNICs and connects them with the <a href="https://github.com/fpgasystems/Coyote" rel="external nofollow noopener" target="_blank">Coyote</a> RDMA stack, so secret-shared data moves between parties without touching the host CPU and communication overlaps with computation. <a href="https://doi.org/10.1109/HPEC67600.2025.11196126" rel="external nofollow noopener" target="_blank">Paper (IEEE Xplore)</a></p> <figure class="diagram"><svg class="dg" viewbox="0 0 640 236" role="img" aria-labelledby="mpc-fpga-t mpc-fpga-d" xmlns="http://www.w3.org/2000/svg"><title id="mpc-fpga-t">FPGA-accelerated multi-party computation</title> <desc id="mpc-fpga-d">Three parties each pair a host with an FPGA SmartNIC that runs the MPC engine. The SmartNICs exchange secret-shared data over RDMA through a 100 Gb/s switch, bypassing the CPU.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style> <defs><marker id="mpc-fpga-mn" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="mpc-fpga-mh" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="mpc-fpga-mo" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"></path></marker></defs><rect class="grp" x="24" y="12" width="184" height="120" rx="10"></rect> <text class="gl" x="36" y="30" font-size="12">Party 1</text> <rect class="bx" x="40" y="38" width="152" height="34" rx="7"></rect> <text class="tx" x="116.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text> <rect class="hl" x="40" y="84" width="152" height="36" rx="7"></rect> <text class="tx" x="116.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text> <polyline class="ar" points="116,72 116,82" marker-end="url(#mpc-fpga-mn)"></polyline> <polyline class="ar h" points="116,132 116,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"></polyline> <rect class="grp" x="228" y="12" width="184" height="120" rx="10"></rect> <text class="gl" x="240" y="30" font-size="12">Party 2</text> <rect class="bx" x="244" y="38" width="152" height="34" rx="7"></rect> <text class="tx" x="320.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text> <rect class="hl" x="244" y="84" width="152" height="36" rx="7"></rect> <text class="tx" x="320.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text> <polyline class="ar" points="320,72 320,82" marker-end="url(#mpc-fpga-mn)"></polyline> <polyline class="ar h" points="320,132 320,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"></polyline> <rect class="grp" x="432" y="12" width="184" height="120" rx="10"></rect> <text class="gl" x="444" y="30" font-size="12">Party 3</text> <rect class="bx" x="448" y="38" width="152" height="34" rx="7"></rect> <text class="tx" x="524.0" y="59.5" text-anchor="middle" font-size="13" font-weight="500">Host CPU</text> <rect class="hl" x="448" y="84" width="152" height="36" rx="7"></rect> <text class="tx" x="524.0" y="106.5" text-anchor="middle" font-size="13" font-weight="500">FPGA SmartNIC</text> <polyline class="ar" points="524,72 524,82" marker-end="url(#mpc-fpga-mn)"></polyline> <polyline class="ar h" points="524,132 524,168" marker-end="url(#mpc-fpga-mh)" marker-start="url(#mpc-fpga-mh)"></polyline> <rect class="bx" x="24" y="170" width="592" height="38" rx="7"></rect> <text class="tx" x="320.0" y="193.5" text-anchor="middle" font-size="12" font-weight="500">100 Gb/s switch · RDMA, CPU bypass</text> <text class="sb" x="320" y="228" text-anchor="middle" font-size="11">Secret-shared data only: no party sees another's inputs</text></svg> </figure> <div class="kpis"> <div class="kpi"> <div class="kpi-value">2.1×</div> <div class="kpi-label">faster convolution layers than existing MPC frameworks</div> </div> <div class="kpi"> <div class="kpi-value">HPEC 2025</div> <div class="kpi-label"><a href="/awards/">Outstanding Student Paper Award</a></div> </div> </div> <p>Current work extends this to GPU–FPGA acceleration with GPUDirect RDMA, aiming to cut host-memory copies from the secure-training data path.</p> <p><span hidden=""><a class="citation" href="#yao2025mpc">(Yao et al., 2025)</a></span></p> </article> <h2>References</h2> <div class="publications"> <h2 class="bibliography">2025</h2> <ol class="bibliography"><li> <div class="row"> <div class="col col-sm-3 abbr"> <abbr class="badge rounded w-100" style="background-color:#00629b"> <a href="https://ieee-hpec.org/" rel="external nofollow noopener" target="_blank">HPEC</a> </abbr> <figure> <picture> <img src="/assets/img/publication_preview/mpc-fpga.svg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="Accelerating Multi-Party Computation Using Heterogeneous Systems" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="yao2025mpc" class="col-sm-9"> <div class="title">Accelerating Multi-Party Computation Using Heterogeneous Systems</div> <a class="award-inline" href="/awards/" title="See awards"> <i class="fa-solid fa-trophy" aria-hidden="true"></i> Outstanding Student Paper Award </a> <div class="author"> <em>Xiteng Yao</em>, Shining Yang, <a href="https://www.mvaria.com/" rel="external nofollow noopener" target="_blank">Mayank Varia</a>, and <a href="https://www.bu.edu/eng/profile/martin-herbordt/" rel="external nofollow noopener" target="_blank">Martin Herbordt</a> </div> <div class="periodical"> <em>In 2025 IEEE High Performance Extreme Computing Conference (HPEC)</em>, 2025 </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Abstract</a> <a href="https://doi.org/10.1109/HPEC67600.2025.11196126" class="btn btn-sm z-depth-0" title="Official version (DOI 10.1109/HPEC67600.2025.11196126)" rel="external nofollow noopener" target="_blank">IEEE Xplore</a> <a class="bibtex btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Cite</a> </div> <div class="abstract hidden"> <p>An FPGA architecture for secure machine-learning training with multi-party computation that integrates the Coyote RDMA stack on AMD FPGA SmartNICs for CPU-bypass transfers, overlapping communication with computation and reaching a 2.1× convolution-layer speedup over existing MPC frameworks.</p> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">yao2025mpc</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Accelerating Multi-Party Computation Using Heterogeneous Systems}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Yao, Xiteng and Yang, Shining and Varia, Mayank and Herbordt, Martin}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{2025 IEEE High Performance Extreme Computing Conference (HPEC)}</span><span class="p">,</span>
+  <span class="na">pages</span> <span class="p">=</span> <span class="s">{1--10}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2025}</span><span class="p">,</span>
+  <span class="na">doi</span> <span class="p">=</span> <span class="s">{10.1109/HPEC67600.2025.11196126}</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li></ol> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Xiteng Yao. Built with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="external nofollow noopener">al-folio</a>, hosted on <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "About",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "Publications",
+          description: "Papers on LLM systems, FPGA and SmartNIC acceleration, and performance engineering, by year. * marks equal contribution.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "Research",
+          description: "Research projects, current and earlier. Each page lists its related papers.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-experience",
+          title: "Experience",
+          description: "Industry internships, research, teaching, and service.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/experience/";
+          },
+        },{id: "nav-awards",
+          title: "Awards",
+          description: "Awards, honors, and research funding.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/awards/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae (PDF).",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "news-our-smartnic-gpu-cpu-co-design-for-large-model-training-appeared-at-acm-ics-2025-research-page",
+          title: 'Our SmartNIC–GPU–CPU co-design for large-model training appeared at ACM ICS 2025. Research page...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-applied-scientist-intern-at-amazon-web-services-in-santa-clara-experience",
+          title: 'Started as an Applied Scientist Intern at Amazon Web Services in Santa Clara....',
+          description: "",
+          section: "News",},{id: "news-our-paper-accelerating-multi-party-computation-using-heterogeneous-systems-received-the-outstanding-student-paper-award-at-ieee-hpec-2025-research-page",
+          title: 'Our paper Accelerating Multi-Party Computation Using Heterogeneous Systems received the Outstanding Student Paper...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-ai-research-scientist-intern-at-arm-in-seattle-working-on-attention-ffn-disaggregated-llm-inference-experience",
+          title: 'Started as an AI Research Scientist Intern at Arm in Seattle, working on...',
+          description: "",
+          section: "News",},{id: "news-presented-smartfuse-llm-at-heart-2026-fusing-computation-into-collectives-projects-50-5-lower-per-boundary-latency-research-page",
+          title: 'Presented SmartFuse-LLM at HEART 2026: fusing computation into collectives projects 50.5% lower per-boundary...',
+          description: "",
+          section: "News",},{id: "news-kernelsight-lm-a-kernel-level-llm-inference-simulator-from-my-aws-internship-is-on-arxiv-research-page",
+          title: 'KernelSight-LM, a kernel-level LLM inference simulator from my AWS internship, is on arXiv....',
+          description: "",
+          section: "News",},{id: "news-three-papers-at-ieee-hpec-2026-acbench-poolstatelens-and-rl-guided-gpu-compiler-optimization-on-blackwell-research",
+          title: 'Three papers at IEEE HPEC 2026: ACBench, PoolStateLens, and RL-guided GPU compiler optimization...',
+          description: "",
+          section: "News",},{id: "projects-llm-performance-modeling-and-ai-for-performance-engineering",
+          title: 'LLM performance modeling and AI for performance engineering',
+          description: "Predicting LLM inference performance, and measuring what helps code-optimizing agents",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/ai-perf-engineering/";
+            },},{id: "projects-machine-learning-guided-compiler-optimization-for-fpgas",
+          title: 'Machine-learning-guided compiler optimization for FPGAs',
+          description: "Learning LLVM pass sequences for high-level synthesis",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/ml-hls/";
+            },},{id: "projects-programmable-switches-for-distributed-llm-systems",
+          title: 'Programmable switches for distributed LLM systems',
+          description: "Fusing computation and placing state inside the network fabric",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/programmable-switches/";
+            },},{id: "projects-fpga-accelerated-secure-machine-learning",
+          title: 'FPGA-accelerated secure machine learning',
+          description: "Multi-party computation on FPGA SmartNICs with RDMA",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/secure-ml-mpc/";
+            },},{id: "projects-smartnic-offload-for-large-model-training",
+          title: 'SmartNIC offload for large-model training',
+          description: "Overlapping ZeRO communication with GPU and CPU computation",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/smartnic-training/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%78%74%79%61%6F@%62%75.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=X9AzwrMAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/xtyao66", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/xiteng-yao-578086199", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/cv.pdf", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>

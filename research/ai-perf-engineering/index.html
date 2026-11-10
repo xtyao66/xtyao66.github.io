@@ -1,0 +1,240 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> LLM performance modeling and AI for performance engineering | Xiteng Yao </title> <meta name="author" content="Xiteng Yao"> <meta name="description" content="Predicting LLM inference performance, and measuring what helps code-optimizing agents"> <meta name="keywords" content="Xiteng Yao, Boston University, CAAD Lab, LLM systems, FPGA, SmartNIC, collective communication, HPC"> <meta property="og:site_name" content="Xiteng Yao"> <meta property="og:type" content="website"> <meta property="og:title" content="Xiteng Yao | LLM performance modeling and AI for performance engineering"> <meta property="og:url" content="https://xtyao66.github.io/research/ai-perf-engineering/"> <meta property="og:description" content="Predicting LLM inference performance, and measuring what helps code-optimizing agents"> <meta property="og:image" content="https://xtyao66.github.io/assets/img/og-card.jpg"> <meta property="og:locale" content="en"> <meta name="twitter:card" content="summary"> <meta name="twitter:title" content="LLM performance modeling and AI for performance engineering"> <meta name="twitter:description" content="Predicting LLM inference performance, and measuring what helps code-optimizing agents"> <meta name="twitter:image" content="https://xtyao66.github.io/assets/img/og-card.jpg"> <script type="application/ld+json">
+    {
+        "author":
+        {
+            "@type": "Person",
+            "name": "Xiteng Yao"
+        },
+        "url": "https://xtyao66.github.io/research/ai-perf-engineering/",
+        "@type": "WebSite",
+        "description": "Predicting LLM inference performance, and measuring what helps code-optimizing agents",
+        "headline": "LLM performance modeling and AI for performance engineering",
+        
+        "sameAs": ["https://scholar.google.com/citations?user=X9AzwrMAAAAJ","https://github.com/xtyao66","https://www.linkedin.com/in/xiteng-yao-578086199",null],
+        
+        "name": "Xiteng Yao",
+        "@context": "https://schema.org"
+    }
+  </script> <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; media-src 'self' https:; frame-src 'self' https:; connect-src 'self' https:;"> <style>
+  :root {
+    --max-content-width: 930px;
+  }
+</style> <link rel="stylesheet" href="/assets/css/tailwind.css?v=50c64c15cbb9fd1ce6056fdb8bcb4b62"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.2.0/css/all.min.css" integrity="sha256-MVopmdyC2tYTiJ8wlktf0uh0v4NgT+vNdyVFepi7Q0c=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.5/css/academicons.min.css" integrity="sha256-SzrCOBJbGVFMahewkgjwnApaV2+av1DwMAA+/QGLyZw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="https://cdn.jsdelivr.net/npm/scholar-icons@1.0.3/css/scholar-icons.css" integrity="sha256-VY3hHVj/hNX3fYG6wtbA6TcKJQl7+FthzGSyIB64klY=" crossorigin="anonymous"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?v=591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="/assets/img/favicon.svg?v=5e780df17fd8ed40e292c8127a45485b"> <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=6abae07e8ffe37e535be738e876bbe60"> <link rel="stylesheet" href="/assets/css/main.css?v=3116ba77db9ee1581d05bb3e86fbf7f1"> <link rel="canonical" href="https://xtyao66.github.io/research/ai-perf-engineering/"> <script src="/assets/js/theme.js?v=5286c3e4c334d0ecb8fc0c40ff4fa7ec"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?v=5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
+    initTheme();
+  </script> </head> <body class="fixed-top-nav "> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> Xiteng Yao </a> <button class="navbar-toggler collapsed navbar-toggler-main" type="button" data-nav-toggle="navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse navbar-collapse-main" id="navbarNav"> <ul class="navbar-nav navbar-menu-list flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About </a> </li> <li class="nav-item "> <a class="nav-link" href="/publications/">Publications </a> </li> <li class="nav-item active"> <a class="nav-link" href="/research/">Research <span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/experience/">Experience </a> </li> <li class="nav-item "> <a class="nav-link" href="/awards/">Awards </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">CV </a> </li> <li class="nav-item"> <button id="search-toggle" type="button" title="Search" aria-label="Open search"> <span class="nav-link">ctrl k <i class="fa-solid fa-magnifying-glass"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" type="button" title="Change theme" aria-label="Change color theme"> <i class="fa-half-sun-moon" id="light-toggle-system"></i> <i class="fa-solid fa-moon" id="light-toggle-dark"></i> <i class="fa-solid fa-sun" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"> <span class="progress-bar"></span> </div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">LLM performance modeling and AI for performance engineering</h1> <p class="post-description">Predicting LLM inference performance, and measuring what helps code-optimizing agents</p> </header> <article> <p>Two questions run through this work: can we predict how an LLM deployment will perform before running it, and when an LLM agent or a learned search optimizes code, what actually helps it?</p> <h2 id="kernelsight-lm-predicting-llm-inference-performance">KernelSight-LM: predicting LLM inference performance</h2> <p>Built during my <a href="/experience/">AWS internship</a>. KernelSight-LM extends the <a href="https://github.com/microsoft/vidur" rel="external nofollow noopener" target="_blank">Vidur</a> serving simulator and combines models of GPU kernel latency, communication, and host overhead in a discrete-event scheduler that replays batching and KV-cache behavior, predicting end-to-end latency and throughput for hardware/software co-design and design-space exploration. <a href="https://arxiv.org/abs/2606.28565" rel="external nofollow noopener" target="_blank">Paper (arXiv)</a></p> <figure class="diagram"><svg class="dg" viewbox="0 0 640 212" role="img" aria-labelledby="kernelsight-lm-t kernelsight-lm-d" xmlns="http://www.w3.org/2000/svg"><title id="kernelsight-lm-t">KernelSight-LM</title> <desc id="kernelsight-lm-d">Kernel-latency, communication and host-overhead models feed a discrete-event scheduler that predicts end-to-end LLM inference latency and throughput.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style> <defs><marker id="kernelsight-lm-mn" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="kernelsight-lm-mh" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="kernelsight-lm-mo" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"></path></marker></defs><rect class="bx" x="24" y="16" width="184" height="50" rx="7"></rect> <text class="tx" x="116.0" y="39.0" text-anchor="middle" font-size="13" font-weight="500">Kernel latency model</text> <text class="sb" x="116.0" y="54.0" text-anchor="middle" font-size="11">profiled GPU kernels</text> <rect class="bx" x="24" y="81" width="184" height="50" rx="7"></rect> <text class="tx" x="116.0" y="104.0" text-anchor="middle" font-size="13" font-weight="500">Communication model</text> <text class="sb" x="116.0" y="119.0" text-anchor="middle" font-size="11">collectives</text> <rect class="bx" x="24" y="146" width="184" height="50" rx="7"></rect> <text class="tx" x="116.0" y="169.0" text-anchor="middle" font-size="13" font-weight="500">Host overhead model</text> <text class="sb" x="116.0" y="184.0" text-anchor="middle" font-size="11">launch, scheduling</text> <rect class="hl" x="262" y="66" width="176" height="80" rx="7"></rect> <text class="tx" x="350.0" y="104.0" text-anchor="middle" font-size="12" font-weight="500">Discrete-event scheduler</text> <text class="sb" x="350.0" y="119.0" text-anchor="middle" font-size="11">batching, KV cache</text> <rect class="bx" x="486" y="66" width="132" height="80" rx="7"></rect> <text class="tx" x="552.0" y="104.0" text-anchor="middle" font-size="13" font-weight="500">Predicted</text> <text class="sb" x="552.0" y="119.0" text-anchor="middle" font-size="11">TTFT · TPOT · tput</text> <polyline class="ar" points="208,41 260,84" marker-end="url(#kernelsight-lm-mn)"></polyline> <polyline class="ar" points="208,106 260,106" marker-end="url(#kernelsight-lm-mn)"></polyline> <polyline class="ar" points="208,171 260,128" marker-end="url(#kernelsight-lm-mn)"></polyline> <polyline class="ar h" points="438,106 484,106" marker-end="url(#kernelsight-lm-mh)"></polyline></svg> </figure> <div class="kpis"> <div class="kpi"> <div class="kpi-value">2.7%</div> <div class="kpi-label">median throughput error, target-measured tier</div> </div> <div class="kpi"> <div class="kpi-value">6</div> <div class="kpi-label">model families evaluated</div> </div> </div> <h2 id="acbench-what-helps-llm-agents-optimize-code">ACBench: what helps LLM agents optimize code</h2> <p>ACBench turns merged performance pull requests from six production Go codebases into 14 tasks. An agent proposes patches over several rounds; each patch is applied, tested, and benchmarked against the human fix. Because a retry gives the model both new information and another chance, ACBench compares error-guided and generic retry at an equal proposal budget to separate the two. <a href="https://ieee-hpec.org/wp-content/uploads/2026/09/266.pdf" rel="external nofollow noopener" target="_blank">PDF</a> · <a href="https://github.com/xtyao66/acbench" rel="external nofollow noopener" target="_blank">Code</a></p> <figure class="diagram"><svg class="dg" viewbox="0 0 640 220" role="img" aria-labelledby="acbench-t acbench-d" xmlns="http://www.w3.org/2000/svg"><title id="acbench-t">ACBench</title> <desc id="acbench-d">A task from a real merged pull request goes to an LLM agent, whose patch is applied, tested and benchmarked against the human patch. A feedback policy decides whether to retry and what information to send back.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style> <defs><marker id="acbench-mn" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="acbench-mh" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="acbench-mo" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"></path></marker></defs><rect class="bx" x="18" y="30" width="120" height="52" rx="7"></rect> <text class="tx" x="78.0" y="54.0" text-anchor="middle" font-size="13" font-weight="500">Real PR task</text> <text class="sb" x="78.0" y="69.0" text-anchor="middle" font-size="11">production Go code</text> <rect class="hl" x="166" y="30" width="120" height="52" rx="7"></rect> <text class="tx" x="226.0" y="54.0" text-anchor="middle" font-size="13" font-weight="500">LLM agent</text> <text class="sb" x="226.0" y="69.0" text-anchor="middle" font-size="11">proposes patch</text> <rect class="bx" x="314" y="30" width="130" height="52" rx="7"></rect> <text class="tx" x="379.0" y="54.0" text-anchor="middle" font-size="13" font-weight="500">Apply + test</text> <text class="sb" x="379.0" y="69.0" text-anchor="middle" font-size="11">benchmark</text> <rect class="bx" x="472" y="30" width="150" height="52" rx="7"></rect> <text class="tx" x="547.0" y="54.0" text-anchor="middle" font-size="13" font-weight="500">Score</text> <text class="sb" x="547.0" y="69.0" text-anchor="middle" font-size="11">vs. human patch</text> <polyline class="ar" points="138,56 164,56" marker-end="url(#acbench-mn)"></polyline> <polyline class="ar" points="286,56 312,56" marker-end="url(#acbench-mn)"></polyline> <polyline class="ar" points="444,56 470,56" marker-end="url(#acbench-mn)"></polyline> <rect class="op" x="220" y="140" width="200" height="50" rx="7"></rect> <text class="tx" x="320.0" y="163.0" text-anchor="middle" font-size="13" font-weight="500">Feedback policy</text> <text class="sb" x="320.0" y="178.0" text-anchor="middle" font-size="11">retry · error message · profile</text> <polyline class="ar o" points="379,82 379,138" marker-end="url(#acbench-mo)"></polyline> <text class="sb" x="386" y="114" text-anchor="start" font-size="11">result</text> <polyline class="ar o" points="252,140 252,84" marker-end="url(#acbench-mo)"></polyline> <text class="sb" x="245" y="114" text-anchor="end" font-size="11">retry with feedback</text> <text class="sb" x="320" y="208" text-anchor="middle" font-size="11">What helps: the extra attempt, or the information?</text></svg> </figure> <h2 id="rl-guided-gpu-compiler-optimization-on-nvidia-blackwell">RL-guided GPU compiler optimization on NVIDIA Blackwell</h2> <p>A runtime reward tells a reinforcement-learning search whether a GPU kernel got faster, but not why. This work studies RL-guided optimization of <a href="https://triton-lang.org/" rel="external nofollow noopener" target="_blank">Triton</a> kernels on <a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/" rel="external nofollow noopener" target="_blank">NVIDIA Blackwell</a>, looking at how changes carry through the compiler to the final machine code, to understand when and why an optimization helps. <a href="https://ieee-hpec.org/wp-content/uploads/2026/09/267.pdf" rel="external nofollow noopener" target="_blank">PDF</a></p> <figure class="diagram"><svg class="dg" viewbox="0 0 640 210" role="img" aria-labelledby="rl-gpu-compiler-t rl-gpu-compiler-d" xmlns="http://www.w3.org/2000/svg"><title id="rl-gpu-compiler-t">RL-guided GPU compiler optimization</title> <desc id="rl-gpu-compiler-d">An RL-guided search proposes changes to a Triton kernel's compilation, from compiler passes to the final machine code; each change is traced through the compiler stages and timed on an NVIDIA GB200.</desc><style>.dg text{font-family:Roboto,Helvetica,Arial,sans-serif}
+.dg .bx{fill:var(--dg-box,#ffffff);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2}
+.dg .hl{fill:var(--dg-hl,#e3eefb);stroke:var(--dg-hl-line,#2a78d6);stroke-width:1.4}
+.dg .op{fill:var(--dg-op,#fdeae1);stroke:var(--dg-op-line,#eb6834);stroke-width:1.4}
+.dg .grp{fill:var(--dg-grp,#f4f4f1);stroke:var(--dg-line,#c9c8c2);stroke-width:1.2;stroke-dasharray:5 4}
+.dg .tx{fill:var(--dg-text,#1f2328)}
+.dg .sb{fill:var(--dg-muted,#6b6a65)}
+.dg .gl{fill:var(--dg-muted,#6b6a65);font-weight:500}
+.dg .ar{stroke:var(--dg-arrow,#8f8e89);fill:none;stroke-width:1.6}
+.dg .ar.h{stroke:var(--dg-hl-line,#2a78d6)}
+.dg .ar.o{stroke:var(--dg-op-line,#eb6834)}
+.dg .arh{fill:var(--dg-arrow,#8f8e89)}
+.dg .arh.h{fill:var(--dg-hl-line,#2a78d6)}
+.dg .arh.o{fill:var(--dg-op-line,#eb6834)}</style> <defs><marker id="rl-gpu-compiler-mn" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="rl-gpu-compiler-mh" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh h" d="M0,0 L10,5 L0,10 z"></path></marker><marker id="rl-gpu-compiler-mo" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse"><path class="arh o" d="M0,0 L10,5 L0,10 z"></path></marker></defs><rect class="bx" x="18" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="61.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">Triton</text> <rect class="bx" x="121" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="164.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">TTGIR</text> <polyline class="ar" points="104,56 119,56" marker-end="url(#rl-gpu-compiler-mn)"></polyline> <rect class="bx" x="224" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="267.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">LLVM IR</text> <polyline class="ar" points="207,56 222,56" marker-end="url(#rl-gpu-compiler-mn)"></polyline> <rect class="bx" x="327" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="370.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">PTX</text> <polyline class="ar" points="310,56 325,56" marker-end="url(#rl-gpu-compiler-mn)"></polyline> <rect class="bx" x="430" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="473.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">SASS</text> <polyline class="ar" points="413,56 428,56" marker-end="url(#rl-gpu-compiler-mn)"></polyline> <rect class="hl" x="533" y="34" width="86" height="44" rx="7"></rect> <text class="tx" x="576.0" y="60.5" text-anchor="middle" font-size="13" font-weight="500">GB200</text> <polyline class="ar" points="516,56 531,56" marker-end="url(#rl-gpu-compiler-mn)"></polyline> <text class="sb" x="268" y="20" text-anchor="middle" font-size="11">Trace each change through the compiler</text> <rect class="op" x="220" y="142" width="200" height="50" rx="7"></rect> <text class="tx" x="320.0" y="165.0" text-anchor="middle" font-size="13" font-weight="500">RL-guided search</text> <text class="sb" x="320.0" y="180.0" text-anchor="middle" font-size="11">proposes changes</text> <polyline class="ar o" points="260,142 163,80" marker-end="url(#rl-gpu-compiler-mo)"></polyline> <text class="sb" x="196" y="122" text-anchor="end" font-size="11">compiler passes</text> <polyline class="ar o" points="380,142 448,80" marker-end="url(#rl-gpu-compiler-mo)"></polyline> <text class="sb" x="424" y="122" text-anchor="start" font-size="11">machine code</text> <polyline class="ar h" points="576,78 576,167 422,167" marker-end="url(#rl-gpu-compiler-mh)"></polyline> <text class="sb" x="582" y="126" text-anchor="start" font-size="11">runtime</text></svg> </figure> <p><span hidden=""><a class="citation" href="#yao2026kernelsight">(Yao et al., 2026; Yao* et al., 2026; Yao &amp; Herbordt, 2026)</a></span></p> </article> <h2>References</h2> <div class="publications"> <h2 class="bibliography">2026</h2> <ol class="bibliography"> <li> <div class="row"> <div class="col col-sm-3 abbr"> <abbr class="badge rounded w-100" style="background-color:#b31b1b"> <span>arXiv</span> </abbr> <figure> <picture> <img src="/assets/img/publication_preview/kernelsight-lm.svg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="KernelSight-LM: A Kernel-Level LLM Inference Simulator" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="yao2026kernelsight" class="col-sm-9"> <div class="title">KernelSight-LM: A Kernel-Level LLM Inference Simulator</div> <div class="author"> <em>Xiteng Yao</em>, Taeho Kim, Hengzhi Pei, Xinle Liu, Kyle Ulrich, Leonard Lausen, Ashish Khetan, Xiang Song, <a href="https://www-users.cse.umn.edu/~karypis/" rel="external nofollow noopener" target="_blank">George Karypis</a>, and <a href="https://www.bu.edu/eng/profile/martin-herbordt/" rel="external nofollow noopener" target="_blank">Martin Herbordt</a> </div> <div class="periodical"> <em>arXiv preprint arXiv:2606.28565</em>, 2026 </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Abstract</a> <a href="https://arxiv.org/abs/2606.28565" class="btn btn-sm z-depth-0" rel="external nofollow noopener" target="_blank">arXiv</a> <a class="bibtex btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Cite</a> </div> <div class="abstract hidden"> <p>KernelSight-LM is a GPU-kernel-aware profiling and simulation toolchain that combines kernel-latency, communication, and host-overhead models in a discrete-event scheduler to predict end-to-end LLM inference latency and throughput. Across six model families it reaches 2.7% median throughput-prediction error in the target-measured setting.</p> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@article</span><span class="p">{</span><span class="nl">yao2026kernelsight</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{{KernelSight-LM}: A Kernel-Level {LLM} Inference Simulator}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Yao, Xiteng and Kim, Taeho and Pei, Hengzhi and Liu, Xinle and Ulrich, Kyle and Lausen, Leonard and Khetan, Ashish and Song, Xiang and Karypis, George and Herbordt, Martin}</span><span class="p">,</span>
+  <span class="na">journal</span> <span class="p">=</span> <span class="s">{arXiv preprint arXiv:2606.28565}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-3 abbr"> <abbr class="badge rounded w-100" style="background-color:#00629b"> <a href="https://ieee-hpec.org/" rel="external nofollow noopener" target="_blank">HPEC</a> </abbr> <figure> <picture> <img src="/assets/img/publication_preview/acbench.svg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="ACBench: A Benchmark Suite for Auditing Retry and Profiling Feedback in LLM-Driven Code Optimization" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="yao2026acbench" class="col-sm-9"> <div class="title">ACBench: A Benchmark Suite for Auditing Retry and Profiling Feedback in LLM-Driven Code Optimization</div> <div class="author"> <em>Xiteng Yao<sup>*</sup></em>, Ziyuan Chu<sup>*</sup>, Feng Tai<sup>*</sup>, Bangjie Xue, <a href="https://www.bu.edu/eng/profile/yigong-hu-phd/" rel="external nofollow noopener" target="_blank">Yigong Hu</a>, and <a href="https://www.bu.edu/eng/profile/martin-herbordt/" rel="external nofollow noopener" target="_blank">Martin Herbordt</a> </div> <div class="periodical"> <em>In 2026 IEEE High Performance Extreme Computing Conference (HPEC)</em>, 2026 </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Abstract</a> <a class="bibtex btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Cite</a> <a href="https://ieee-hpec.org/wp-content/uploads/2026/09/266.pdf" class="btn btn-sm z-depth-0" rel="external nofollow noopener" target="_blank">PDF</a> <a href="https://github.com/xtyao66/acbench" class="btn btn-sm z-depth-0" rel="external nofollow noopener" target="_blank">Code</a> </div> <div class="abstract hidden"> <p>ACBench is a benchmark of 14 code-optimization tasks drawn from merged pull requests in six production Go codebases. It separates the value of feedback (application errors, benchmark summaries, CPU profiles) from the value of simply getting more attempts, and tracks when a run can actually use that feedback.</p> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">yao2026acbench</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{{ACBench}: A Benchmark Suite for Auditing Retry and Profiling Feedback in {LLM}-Driven Code Optimization}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Yao, Xiteng and Chu, Ziyuan and Tai, Feng and Xue, Bangjie and Hu, Yigong and Herbordt, Martin}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{2026 IEEE High Performance Extreme Computing Conference (HPEC)}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> <li> <div class="row"> <div class="col col-sm-3 abbr"> <abbr class="badge rounded w-100" style="background-color:#00629b"> <a href="https://ieee-hpec.org/" rel="external nofollow noopener" target="_blank">HPEC</a> </abbr> <figure> <picture> <img src="/assets/img/publication_preview/rl-gpu-compiler.svg" class="preview z-depth-1 rounded" width="100%" height="auto" alt="Toward RL-Guided GPU Compiler Optimization: Case Studies on Nvidia Blackwell GPUs" data-zoomable loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"> </picture> </figure> </div> <div id="yao2026rlgpucompiler" class="col-sm-9"> <div class="title">Toward RL-Guided GPU Compiler Optimization: Case Studies on Nvidia Blackwell GPUs</div> <div class="author"> <em>Xiteng Yao</em> and <a href="https://www.bu.edu/eng/profile/martin-herbordt/" rel="external nofollow noopener" target="_blank">Martin Herbordt</a> </div> <div class="periodical"> <em>In 2026 IEEE High Performance Extreme Computing Conference (HPEC)</em>, 2026 </div> <div class="links"> <a class="abstract btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Abstract</a> <a class="bibtex btn btn-sm z-depth-0" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}">Cite</a> <a href="https://ieee-hpec.org/wp-content/uploads/2026/09/267.pdf" class="btn btn-sm z-depth-0" rel="external nofollow noopener" target="_blank">PDF</a> </div> <div class="abstract hidden"> <p>Case studies of reinforcement-learning-guided GPU compiler optimization on NVIDIA Blackwell, combining runtime measurements with evidence from each compilation stage to understand when and why an optimization helps.</p> </div> <div class="bibtex hidden"> <figure class="highlight"><pre><code class="language-bibtex" data-lang="bibtex"><span class="nc">@inproceedings</span><span class="p">{</span><span class="nl">yao2026rlgpucompiler</span><span class="p">,</span>
+  <span class="na">title</span> <span class="p">=</span> <span class="s">{Toward {RL}-Guided {GPU} Compiler Optimization: Case Studies on {Nvidia} {Blackwell} {GPUs}}</span><span class="p">,</span>
+  <span class="na">author</span> <span class="p">=</span> <span class="s">{Yao, Xiteng and Herbordt, Martin}</span><span class="p">,</span>
+  <span class="na">booktitle</span> <span class="p">=</span> <span class="s">{2026 IEEE High Performance Extreme Computing Conference (HPEC)}</span><span class="p">,</span>
+  <span class="na">year</span> <span class="p">=</span> <span class="s">{2026}</span><span class="p">,</span>
+<span class="p">}</span></code></pre></figure> </div> </div> </div> </li> </ol> </div> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2026 Xiteng Yao. Built with <a href="https://github.com/alshedivat/al-folio" target="_blank" rel="external nofollow noopener">al-folio</a>, hosted on <a href="https://pages.github.com/" target="_blank" rel="external nofollow noopener">GitHub Pages</a>. </div> </footer> <script>
+  window.alFolio = {
+    compatBootstrap: false
+  };
+</script> <script src="/assets/js/nav-toggle.js?v=141bd79a73ebc0f0b6ea58e440ae79fc"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?v=e49affc7bd2646f6acdad1dbe02c2359" type="text/javascript"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/al_math/js/mathjax-setup.js"></script> <script src="/assets/js/tooltips-setup.js?v=fe487e99db6c43751e6e7bdb2d6a0611"></script> <script src="/assets/js/no_defer.js?v=53b1b1a645525975c963ce8bf8bfefcf"></script> <script defer src="/assets/js/common.js?v=87baac90f765f2f3362dcf6aaf312a8a"></script> <script defer src="/assets/js/copy_code.js?v=c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?v=896d254890d9b47f0281f63bfccf0dee"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/al_img_tools/js/zoom.js"></script> <script defer src="/assets/js/progress-bar.js?v=499464c5c63ced6cf7ad62509f1e2610" type="text/javascript"></script> <script src="https://cdn.jsdelivr.net/npm/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js" integrity="sha256-uMJJ3EoTyfRBoTbR+lrfu1uRQ87RZG8AR3cVNuQVeFg=" crossorigin="anonymous"></script> <script>
+    addBackToTop();
+  </script> <script type="module" src="/assets/al_search/js/search/ninja-keys.min.js"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/al_search/js/search-setup.js"></script> <script>
+// get the ninja-keys element
+const ninja = document.querySelector('ninja-keys');
+
+// add the home and posts menu items
+ninja.data = [{
+    id: "nav-about",
+    title: "About",
+    section: "Navigation",
+    handler: () => {
+      window.location.href = "/";
+    },
+  },{id: "nav-publications",
+          title: "Publications",
+          description: "Papers on LLM systems, FPGA and SmartNIC acceleration, and performance engineering, by year. * marks equal contribution.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/publications/";
+          },
+        },{id: "nav-research",
+          title: "Research",
+          description: "Research projects, current and earlier. Each page lists its related papers.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/research/";
+          },
+        },{id: "nav-experience",
+          title: "Experience",
+          description: "Industry internships, research, teaching, and service.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/experience/";
+          },
+        },{id: "nav-awards",
+          title: "Awards",
+          description: "Awards, honors, and research funding.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/awards/";
+          },
+        },{id: "nav-cv",
+          title: "CV",
+          description: "Curriculum vitae (PDF).",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/cv/";
+          },
+        },{id: "news-our-smartnic-gpu-cpu-co-design-for-large-model-training-appeared-at-acm-ics-2025-research-page",
+          title: 'Our SmartNIC–GPU–CPU co-design for large-model training appeared at ACM ICS 2025. Research page...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-applied-scientist-intern-at-amazon-web-services-in-santa-clara-experience",
+          title: 'Started as an Applied Scientist Intern at Amazon Web Services in Santa Clara....',
+          description: "",
+          section: "News",},{id: "news-our-paper-accelerating-multi-party-computation-using-heterogeneous-systems-received-the-outstanding-student-paper-award-at-ieee-hpec-2025-research-page",
+          title: 'Our paper Accelerating Multi-Party Computation Using Heterogeneous Systems received the Outstanding Student Paper...',
+          description: "",
+          section: "News",},{id: "news-started-as-an-ai-research-scientist-intern-at-arm-in-seattle-working-on-attention-ffn-disaggregated-llm-inference-experience",
+          title: 'Started as an AI Research Scientist Intern at Arm in Seattle, working on...',
+          description: "",
+          section: "News",},{id: "news-presented-smartfuse-llm-at-heart-2026-fusing-computation-into-collectives-projects-50-5-lower-per-boundary-latency-research-page",
+          title: 'Presented SmartFuse-LLM at HEART 2026: fusing computation into collectives projects 50.5% lower per-boundary...',
+          description: "",
+          section: "News",},{id: "news-kernelsight-lm-a-kernel-level-llm-inference-simulator-from-my-aws-internship-is-on-arxiv-research-page",
+          title: 'KernelSight-LM, a kernel-level LLM inference simulator from my AWS internship, is on arXiv....',
+          description: "",
+          section: "News",},{id: "news-three-papers-at-ieee-hpec-2026-acbench-poolstatelens-and-rl-guided-gpu-compiler-optimization-on-blackwell-research",
+          title: 'Three papers at IEEE HPEC 2026: ACBench, PoolStateLens, and RL-guided GPU compiler optimization...',
+          description: "",
+          section: "News",},{id: "projects-llm-performance-modeling-and-ai-for-performance-engineering",
+          title: 'LLM performance modeling and AI for performance engineering',
+          description: "Predicting LLM inference performance, and measuring what helps code-optimizing agents",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/ai-perf-engineering/";
+            },},{id: "projects-machine-learning-guided-compiler-optimization-for-fpgas",
+          title: 'Machine-learning-guided compiler optimization for FPGAs',
+          description: "Learning LLVM pass sequences for high-level synthesis",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/ml-hls/";
+            },},{id: "projects-programmable-switches-for-distributed-llm-systems",
+          title: 'Programmable switches for distributed LLM systems',
+          description: "Fusing computation and placing state inside the network fabric",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/programmable-switches/";
+            },},{id: "projects-fpga-accelerated-secure-machine-learning",
+          title: 'FPGA-accelerated secure machine learning',
+          description: "Multi-party computation on FPGA SmartNICs with RDMA",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/secure-ml-mpc/";
+            },},{id: "projects-smartnic-offload-for-large-model-training",
+          title: 'SmartNIC offload for large-model training',
+          description: "Overlapping ZeRO communication with GPU and CPU computation",
+          section: "Projects",handler: () => {
+              window.location.href = "/research/smartnic-training/";
+            },},{
+        id: 'social-email',
+        title: 'email',
+        section: 'Socials',
+        handler: () => {
+          window.open("mailto:%78%74%79%61%6F@%62%75.%65%64%75", "_blank");
+        },
+      },{
+        id: 'social-scholar',
+        title: 'Google Scholar',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://scholar.google.com/citations?user=X9AzwrMAAAAJ", "_blank");
+        },
+      },{
+        id: 'social-github',
+        title: 'GitHub',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://github.com/xtyao66", "_blank");
+        },
+      },{
+        id: 'social-linkedin',
+        title: 'LinkedIn',
+        section: 'Socials',
+        handler: () => {
+          window.open("https://www.linkedin.com/in/xiteng-yao-578086199", "_blank");
+        },
+      },{
+        id: 'social-cv',
+        title: 'CV',
+        section: 'Socials',
+        handler: () => {
+          window.open("/assets/pdf/cv.pdf", "_blank");
+        },
+      },{
+      id: 'light-theme',
+      title: 'Change theme to light',
+      description: 'Change the theme of the site to Light',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("light");
+      },
+    },
+    {
+      id: 'dark-theme',
+      title: 'Change theme to dark',
+      description: 'Change the theme of the site to Dark',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("dark");
+      },
+    },
+    {
+      id: 'system-theme',
+      title: 'Use system default theme',
+      description: 'Change the theme of the site to System Default',
+      section: 'Theme',
+      handler: () => {
+        setThemeSetting("system");
+      },
+    },];
+
+</script> <script src="/assets/al_search/js/shortcut-key.js"></script> </body> </html>
