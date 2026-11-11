@@ -215,7 +215,10 @@ figure.diagram {
 .social.social-top {
   margin: 1.25rem 0 0.5rem;
   .contact-icons {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    @media (max-width: 576px) {
+      font-size: 2rem; // keeps all icons on one line on a phone
+    }
   }
 }
 
