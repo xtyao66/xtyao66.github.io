@@ -16,8 +16,9 @@ nav_order: 4
     <ul>
       <li>Built a runtime for <strong>attention–FFN disaggregation (AFD)</strong> in LLM inference, running attention and feed-forward layers as separate serving stages.</li>
       <li>Implemented context-length-aware request routing and expert routing to handle workload and mixture-of-experts imbalance.</li>
+      <li>Evaluated on a <strong>2.4T-parameter</strong> Qwen 3.8 model across 36 GB200 GPUs in an <a href="https://www.nvidia.com/en-us/data-center/gb200-nvl72/">NVL72</a> system: <strong>44–67% higher token throughput</strong> and up to <strong>28% lower p99 inter-token latency</strong> than vLLM.</li>
     </ul>
-    <div class="xp-tags"><span class="xp-tag">LLM inference</span><span class="xp-tag">disaggregated serving</span><span class="xp-tag">MoE</span><span class="xp-tag">vLLM</span></div>
+    <div class="xp-tags"><span class="xp-tag">LLM inference</span><span class="xp-tag">disaggregated serving</span><span class="xp-tag">MoE</span><span class="xp-tag">GB200 NVL72</span><span class="xp-tag">vLLM</span></div>
   </div>
 
   <div class="xp-item">
