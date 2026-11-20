@@ -57,6 +57,37 @@ nav_order: 4
 
 </div>
 
+## Education
+
+<div class="xp">
+
+  <div class="xp-item">
+    <div class="xp-when">Sep 2023 – May 2027 (expected)</div>
+    <div class="xp-role">PhD in Computer Engineering</div>
+    <div class="xp-org"><a href="https://www.bu.edu/">Boston University</a> <span class="xp-where">· Boston, MA</span></div>
+    <ul>
+      <li>Advisor: <a href="https://www.bu.edu/eng/profile/martin-herbordt/">Prof. Martin Herbordt</a>, <a href="https://www.bu.edu/caadlab/">CAAD Lab</a>.</li>
+      <li>Research focus: LLM training and inference systems, HPC, distributed systems, networking, SmartNICs, and programmable switches.</li>
+    </ul>
+  </div>
+
+  <div class="xp-item">
+    <div class="xp-when">En route to the PhD</div>
+    <div class="xp-role">MS in Computer Engineering</div>
+    <div class="xp-org"><a href="https://www.bu.edu/">Boston University</a> <span class="xp-where">· Boston, MA</span></div>
+  </div>
+
+  <div class="xp-item">
+    <div class="xp-when">May 2023</div>
+    <div class="xp-role">BS in Computer Engineering, Magna Cum Laude</div>
+    <div class="xp-org"><a href="https://www.bu.edu/">Boston University</a> <span class="xp-where">· Boston, MA</span></div>
+    <ul>
+      <li>Minor in Computer Science; concentration in Machine Learning.</li>
+    </ul>
+  </div>
+
+</div>
+
 ## Teaching
 
 Teaching assistant, [Department of Electrical and Computer Engineering](https://www.bu.edu/eng/academics/departments-and-divisions/electrical-and-computer-engineering/), Boston University, 2019–2026:
