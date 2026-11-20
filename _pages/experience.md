@@ -2,7 +2,7 @@
 layout: page
 permalink: /experience/
 title: Experience
-description: Industry internships, research, teaching, and service.
+description: Industry internships, research, education, teaching, and service.
 nav: true
 nav_order: 4
 ---
