@@ -35,7 +35,7 @@ and ask how to measure what really helps
 [LLM agents that optimize code]({{ '/research/ai-perf-engineering/' | relative_url }}).
 
 I have interned at **[Arm](https://www.arm.com/)** as an AI Research Scientist Intern, building an attention–FFN
-disaggregated LLM inference runtime that, on a 2.4T-parameter model across 36 GB200 GPUs, reached 44–67% higher
+disaggregated LLM inference runtime that, on models of up to 2.4T parameters across 36 GB200 GPUs, reached up to 67% higher
 throughput than vLLM, and at **[Amazon Web Services](https://aws.amazon.com/)** as an Applied Scientist Intern, where I
 built [KernelSight-LM](https://arxiv.org/abs/2606.28565), a kernel-level LLM inference simulator.
 More in [experience]({{ '/experience/' | relative_url }}) and the [CV]({{ '/cv/' | relative_url }}).
